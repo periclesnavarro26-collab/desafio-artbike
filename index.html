@@ -3,24 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Art Bike | Desafio 250KM no Strava</title>
+  <title>Artbike | Desafio 250KM no Strava</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --primary: #2563eb;
+      --accent: #fb923c;
+      --dark: #0f172a;
+      --dark-2: #111827;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 28px;
+      --radius-md: 22px;
+      --radius-sm: 16px;
+    }
+
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: "Poppins", "Segoe UI", sans-serif;
-      background: #f4f5f7;
-      color: #111827;
+      background: var(--bg);
+      color: var(--text);
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
     header {
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 50;
@@ -32,12 +51,15 @@
       justify-content: space-between;
       gap: 18px;
       padding: 14px 26px;
+      max-width: 1440px;
+      margin: 0 auto;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 14px;
+      min-width: 260px;
     }
 
     .brand-logo {
@@ -45,7 +67,7 @@
       height: 64px;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--border);
       background: #fff;
       display: grid;
       place-items: center;
@@ -70,7 +92,7 @@
       letter-spacing: 0.04em;
     }
     .brand-text span {
-      color: #6b7280;
+      color: var(--muted);
       font-size: 0.88rem;
       font-weight: 500;
     }
@@ -83,19 +105,24 @@
     .search-box input {
       width: 100%;
       border-radius: 999px;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--border);
       background: #f8fafc;
       padding: 12px 50px 12px 18px;
       font-size: 0.95rem;
-      color: #111827;
+      color: var(--text);
       font-family: inherit;
+      outline: none;
+    }
+    .search-box input:focus {
+      border-color: rgba(37, 99, 235, 0.45);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
     }
     .search-box .icon {
       position: absolute;
       right: 18px;
       top: 50%;
       transform: translateY(-50%);
-      color: #6b7280;
+      color: var(--muted);
       font-size: 1rem;
       pointer-events: none;
     }
@@ -125,14 +152,16 @@
       background: #ffffff;
       font-weight: 700;
       letter-spacing: 0.02em;
+      max-width: 1440px;
+      margin: 0 auto;
     }
     nav.main-nav a {
-      color: #111827;
+      color: var(--text);
       font-size: 0.95rem;
       transition: color .2s ease;
     }
     nav.main-nav a:hover {
-      color: #2563eb;
+      color: var(--primary);
     }
 
     .hero {
@@ -145,9 +174,9 @@
     }
 
     .hero-left {
-      background: linear-gradient(135deg, #0f172a, #111827);
+      background: linear-gradient(135deg, var(--dark), var(--dark-2));
       color: #fff;
-      border-radius: 32px;
+      border-radius: var(--radius-xl);
       padding: 40px;
       position: relative;
       overflow: hidden;
@@ -162,18 +191,32 @@
       border-radius: 50%;
       background: rgba(255,255,255,0.08);
     }
+    .hero-left::after {
+      content: "";
+      position: absolute;
+      left: -50px;
+      bottom: -70px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.12);
+    }
+
     .hero-badge {
       display: inline-flex;
       padding: 10px 16px;
       border-radius: 999px;
-      background: rgba(96,165,250,0.18);
+      background: rgba(96, 165, 250, 0.18);
       color: #bfdbfe;
       font-size: 0.92rem;
       font-weight: 700;
       margin-bottom: 24px;
       font-family: "Montserrat", sans-serif;
       letter-spacing: 0.05em;
+      position: relative;
+      z-index: 1;
     }
+
     .hero-left h1 {
       margin: 0;
       font-family: "Montserrat", sans-serif;
@@ -181,6 +224,8 @@
       line-height: 1.02;
       font-weight: 800;
       letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
     }
     .hero-left p {
       margin: 24px 0 0;
@@ -189,18 +234,22 @@
       line-height: 1.85;
       font-size: 1rem;
       font-weight: 400;
+      position: relative;
+      z-index: 1;
     }
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
       margin-top: 32px;
+      position: relative;
+      z-index: 1;
     }
     .btn {
       border-radius: 999px;
       font-weight: 700;
       padding: 14px 24px;
-      transition: transform .2s ease, filter .2s ease;
+      transition: transform .2s ease, filter .2s ease, background .2s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -209,7 +258,7 @@
       font-size: 0.95rem;
     }
     .btn-primary {
-      background: #fb923c;
+      background: var(--accent);
       color: #fff;
     }
     .btn-secondary {
@@ -224,6 +273,8 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
       margin-top: 36px;
+      position: relative;
+      z-index: 1;
     }
     .stat-card {
       background: rgba(255,255,255,0.08);
@@ -251,10 +302,10 @@
     }
     .promo-card {
       background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 18px 50px rgba(15,23,42,0.08);
+      box-shadow: var(--shadow);
     }
     .promo-card img {
       width: 100%;
@@ -269,7 +320,7 @@
       font-family: "Montserrat", sans-serif;
       font-size: 1.15rem;
       font-weight: 700;
-      color: #111827;
+      color: var(--text);
     }
     .promo-card p {
       margin: 0;
@@ -285,7 +336,7 @@
       font-family: "Montserrat", sans-serif;
       font-size: 1.8rem;
       font-weight: 800;
-      color: #111827;
+      color: var(--text);
       letter-spacing: -0.02em;
     }
 
@@ -299,14 +350,14 @@
     }
     .product-card {
       background: #fff;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--border);
       border-radius: 26px;
       overflow: hidden;
       transition: transform .2s ease, box-shadow .2s ease;
     }
     .product-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+      box-shadow: var(--shadow);
     }
     .product-card img {
       width: 100%;
@@ -317,11 +368,11 @@
       padding: 20px;
     }
     .product-card h4 {
-      margin-bottom: 10px;
+      margin: 0 0 10px;
       font-family: "Montserrat", sans-serif;
       font-size: 1.05rem;
       font-weight: 700;
-      color: #111827;
+      color: var(--text);
     }
     .product-card p {
       margin: 0;
@@ -342,9 +393,10 @@
     }
     .medal-card {
       background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       overflow: hidden;
+      box-shadow: var(--shadow);
     }
     .medal-card img {
       width: 100%;
@@ -353,18 +405,19 @@
     }
     .medal-info {
       background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       padding: 28px;
       display: grid;
       gap: 18px;
+      box-shadow: var(--shadow);
     }
     .medal-info h3 {
       margin: 0;
       font-family: "Montserrat", sans-serif;
       font-size: 1.5rem;
       font-weight: 800;
-      color: #111827;
+      color: var(--text);
     }
     .medal-info p {
       margin: 0;
@@ -381,7 +434,7 @@
       gap: 14px;
       padding: 16px;
       border-radius: 20px;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--border);
       background: #f8fafc;
       align-items: center;
     }
@@ -395,7 +448,7 @@
       display: block;
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
-      color: #111827;
+      color: var(--text);
       margin-bottom: 4px;
     }
     .variant-text span {
@@ -406,8 +459,9 @@
 
     .footer {
       background: #fff;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid var(--border);
       padding: 32px 24px;
+      margin-top: 8px;
     }
     .footer-grid {
       max-width: 1180px;
@@ -416,24 +470,37 @@
       gap: 24px;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
-    .footer h4 { 
-      margin-bottom: 12px; 
-      color: #111827;
+    .footer h4 {
+      margin-bottom: 12px;
+      color: var(--text);
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
     }
-    .footer a { display: block; color: #4b5563; margin-bottom: 10px; }
-    .footer p { margin: 0; color: #6b7280; line-height: 1.8; }
+    .footer a {
+      display: block;
+      color: #4b5563;
+      margin-bottom: 10px;
+    }
+    .footer p {
+      margin: 0;
+      color: #6b7280;
+      line-height: 1.8;
+    }
 
     @media (max-width: 960px) {
       .hero { grid-template-columns: 1fr; }
       .hero-stats { grid-template-columns: 1fr; }
       .medal-shell { grid-template-columns: 1fr; }
+      .brand { min-width: unset; }
     }
+
     @media (max-width: 680px) {
       .topbar { flex-direction: column; align-items: stretch; }
-      .top-actions { justify-content: flex-start; flex-wrap: wrap; }
+      .top-actions { justify-content: flex-start; flex-wrap: wrap; gap: 14px; }
       .search-box { width: 100%; }
+      .hero-left { padding: 28px; }
+      .promo-card img { height: 220px; }
+      .medal-card img { height: 320px; }
     }
   </style>
 </head>
@@ -442,10 +509,10 @@
     <div class="topbar">
       <div class="brand">
         <div class="brand-logo">
-          <img src="logo.png" alt="Art Bike logo" />
+          <img src="logo.png" alt="Logo Artbike" />
         </div>
         <div class="brand-text">
-          <strong>Art Bike</strong>
+          <strong>Artbike</strong>
           <span>Desafio 250KM no Strava</span>
         </div>
       </div>
@@ -471,12 +538,12 @@
     </nav>
   </header>
 
-  <section class="hero">
+  <section class="hero" id="inscricoes">
     <div class="hero-left">
-      <span class="hero-badge">DESAFIO ART BIKE</span>
-      <h1>Complete 250KM no Strava e ganhe a medalha premium Art Bike</h1>
+      <span class="hero-badge">DESAFIO ARTBIKE</span>
+      <h1>Complete 250KM no Strava e conquiste a medalha premium Artbike</h1>
       <p>
-        A Art Bike convida todos os ciclistas para participar do desafio oficial.
+        A Artbike convida todos os ciclistas para participar do desafio oficial.
         Registre seus treinos no Strava, acumule 250 km e receba medalha comemorativa,
         kit exclusivo, premiação em dinheiro e revisão completa da sua bike.
       </p>
@@ -502,16 +569,16 @@
 
     <div class="hero-right">
       <div class="promo-card">
-        <img src="imagens/frente-loja.png" alt="Frente Loja Art Bike" />
+        <img src="imagens/frente-loja.png" alt="Frente da loja Artbike" />
         <div class="card-body">
-          <h3>Frente Loja Art Bike</h3>
+          <h3>Frente da loja Artbike</h3>
           <p>Ambiente preparado para eventos, atendimento especializado e suporte técnico completo.</p>
         </div>
       </div>
       <div class="promo-card">
-        <img src="imagens/medalha-ouro.png" alt="Medalha Ouro" />
+        <img src="imagens/medalha-ouro.png" alt="Medalha ouro Artbike" />
         <div class="card-body">
-          <h3>Medalhas Premium</h3>
+          <h3>Medalhas premium</h3>
           <p>Disponíveis em ouro, prata e bronze com acabamento profissional e design esportivo.</p>
         </div>
       </div>
@@ -521,21 +588,21 @@
   <div class="section-title" id="destaques">Destaques</div>
   <div class="grid-3">
     <div class="product-card">
-      <img src="imagens/frente-loja.png" alt="Loja Art Bike" />
+      <img src="imagens/frente-loja.png" alt="Loja Artbike" />
       <div class="product-body">
-        <h4>Loja Art Bike</h4>
+        <h4>Loja Artbike</h4>
         <p>Espaço profissional e moderno para eventos, atendimento e suporte técnico.</p>
       </div>
     </div>
     <div class="product-card">
-      <img src="imagens/medalha-ouro.png" alt="Medalha Ouro" />
+      <img src="imagens/medalha-ouro.png" alt="Medalha Ouro Artbike" />
       <div class="product-body">
         <h4>Medalha Ouro</h4>
         <p>Acabamento premium em ouro clássico para celebrar os vencedores do desafio.</p>
       </div>
     </div>
     <div class="product-card">
-      <img src="imagens/medalha-prata.png" alt="Medalha Prata" />
+      <img src="imagens/medalha-prata.png" alt="Medalha Prata Artbike" />
       <div class="product-body">
         <h4>Medalha Prata</h4>
         <p>Design sofisticado em prata elegante para reconhecimento dos participantes.</p>
@@ -543,27 +610,27 @@
     </div>
   </div>
 
-  <div class="section-title">Promoções</div>
+  <div class="section-title" id="promocoes">Promoções</div>
   <div class="grid-3">
     <div class="product-card">
-      <img src="imagens/medalha-bronze.png" alt="Medalha Bronze" />
+      <img src="imagens/medalha-bronze.png" alt="Medalha Bronze Artbike" />
       <div class="product-body">
         <h4>Medalha Bronze</h4>
         <p>Acabamento em bronze esportivo com design marcante e visual único.</p>
       </div>
     </div>
     <div class="product-card">
-      <img src="imagens/frente-loja.png" alt="Kit Especial" />
+      <img src="imagens/frente-loja.png" alt="Kit Especial Artbike" />
       <div class="product-body">
-        <h4>Kit Art Bike</h4>
+        <h4>Kit Artbike</h4>
         <p>Itens exclusivos para participantes com frete grátis e condições especiais.</p>
       </div>
     </div>
     <div class="product-card">
-      <img src="imagens/medalha-bronze.png" alt="Evento Final" />
+      <img src="imagens/medalha-bronze.png" alt="Evento Final Artbike" />
       <div class="product-body">
         <h4>Evento Final</h4>
-        <p>Celebração na loja Art Bike com entrega de prêmios e confraternização.</p>
+        <p>Celebração na loja Artbike com entrega de prêmios e confraternização.</p>
       </div>
     </div>
   </div>
@@ -572,28 +639,28 @@
   <div class="medal-section">
     <div class="medal-shell">
       <div class="medal-card">
-        <img src="imagens/medalha-ouro.png" alt="Medalha Ouro Art Bike" />
+        <img src="imagens/medalha-ouro.png" alt="Medalha Ouro Artbike" />
       </div>
       <div class="medal-info">
         <h3>Escolha sua medalha</h3>
-        <p>As medalhas oficiais do desafio Art Bike estão disponíveis em três variações de cores premium, cada uma com acabamento diferenciado e design esportivo profissional.</p>
+        <p>As medalhas oficiais do desafio Artbike estão disponíveis em três variações de cores premium, cada uma com acabamento diferenciado e design esportivo profissional.</p>
         <div class="variant-list">
           <div class="variant">
-            <img src="imagens/medalha-ouro.png" alt="Medalha Ouro" />
+            <img src="imagens/medalha-ouro.png" alt="Medalha Ouro Artbike" />
             <div class="variant-text">
               <strong>Medalha Ouro</strong>
               <span>Acabamento clássico e elegante</span>
             </div>
           </div>
           <div class="variant">
-            <img src="imagens/medalha-prata.png" alt="Medalha Prata" />
+            <img src="imagens/medalha-prata.png" alt="Medalha Prata Artbike" />
             <div class="variant-text">
               <strong>Medalha Prata</strong>
               <span>Estilo sofisticado e moderno</span>
             </div>
           </div>
           <div class="variant">
-            <img src="imagens/medalha-bronze.png" alt="Medalha Bronze" />
+            <img src="imagens/medalha-bronze.png" alt="Medalha Bronze Artbike" />
             <div class="variant-text">
               <strong>Medalha Bronze</strong>
               <span>Visual esportivo e marcante</span>
@@ -607,7 +674,7 @@
   <footer class="footer" id="contato">
     <div class="footer-grid">
       <div>
-        <h4>Art Bike</h4>
+        <h4>Artbike</h4>
         <p>Loja especializada em eventos de ciclismo, acessórios premium e serviços técnicos de qualidade.</p>
       </div>
       <div>
@@ -617,11 +684,11 @@
       </div>
       <div>
         <h4>Redes sociais</h4>
-        <a href="https://instagram.com/artbike" target="_blank">Instagram</a>
-        <a href="https://www.strava.com/clubs/artbike" target="_blank">Strava Club</a>
+        <a href="https://instagram.com/artbike" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://www.strava.com/clubs/artbike" target="_blank" rel="noreferrer">Strava Club</a>
       </div>
     </div>
-    <p style="margin-top:24px; color:#6b7280;">© 2026 Art Bike. Todos os direitos reservados.</p>
+    <p style="margin-top:24px; color:#6b7280; max-width:1180px; margin-left:auto; margin-right:auto;">© 2026 Artbike. Todos os direitos reservados.</p>
   </footer>
 </body>
 </html>
